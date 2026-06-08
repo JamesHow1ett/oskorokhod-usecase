@@ -1,0 +1,38 @@
+# Local Verdaccio registry config for developing clean-service-beta without
+# publishing to the public npm registry.
+#
+#   Start:   npx verdaccio --config ./verdaccio.yaml --listen 4873
+#   Publish: npm publish --registry http://localhost:4873
+#
+# This config allows ANONYMOUS publish so the dev loop needs no login/token.
+# It is for LOCAL DEVELOPMENT ONLY — never expose this registry on a network.
+
+storage: ./.verdaccio-storage
+plugins: ./plugins
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+packages:
+  'clean-service-beta':
+    access: $all
+    publish: $all
+    unpublish: $all
+
+  '@*/*':
+    access: $all
+    publish: $all
+    unpublish: $all
+    proxy: npmjs
+
+  '**':
+    access: $all
+    publish: $all
+    unpublish: $all
+    proxy: npmjs
+
+log:
+  type: stdout
+  format: pretty
+  level: warn

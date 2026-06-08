@@ -1,0 +1,54 @@
+{
+  "name": "clean-service-beta",
+  "version": "1.0.0-beta.1",
+  "description": "Reusable Zod-validated service-layer building blocks: ServiceBase pipeline, ServiceError, and Validator.",
+  "license": "ISC",
+  "author": "Oleksandr Skorokhod <mopis101@gmail.com>",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:exports": "attw --pack .",
+    "check:publish": "publint",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "publint": "^0.3.14",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "zod": "^4.3.6"
+  },
+  "publishConfig": {
+    "registry": "http://localhost:4873",
+    "tag": "beta"
+  }
+}
