@@ -15,18 +15,18 @@ uplinks:
     url: https://registry.npmjs.org/
 
 packages:
-  'clean-service-beta':
+  "clean-service-beta":
     access: $all
     publish: $all
     unpublish: $all
 
-  '@*/*':
+  "@*/*":
     access: $all
     publish: $all
     unpublish: $all
     proxy: npmjs
 
-  '**':
+  "**":
     access: $all
     publish: $all
     unpublish: $all
