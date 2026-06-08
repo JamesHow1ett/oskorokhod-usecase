@@ -4,3 +4,6 @@ dist/
 .DS_Store
 *.tgz
 .verdaccio-storage/
+
+# AI Tools
+.omc
