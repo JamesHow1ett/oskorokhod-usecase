@@ -1,0 +1,26 @@
+# Local development npm registry (Verdaccio).
+#
+#   docker compose up -d verdaccio     # start (or: npm run registry:up)
+#   docker compose down                # stop  (or: npm run registry:down)
+#
+# Web UI / registry:  http://localhost:4873/
+# Package data persists in the named volume `verdaccio-storage`.
+services:
+  verdaccio:
+    image: verdaccio/verdaccio:6
+    container_name: usecase-verdaccio
+    ports:
+      - "4873:4873"
+    volumes:
+      - ./verdaccio/config.yaml:/verdaccio/conf/config.yaml:ro
+      - verdaccio-storage:/verdaccio/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:4873/-/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  verdaccio-storage:

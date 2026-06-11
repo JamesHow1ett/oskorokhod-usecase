@@ -1,0 +1,51 @@
+# Verdaccio config for the local dev registry.
+# Reference: https://verdaccio.org/docs/configuration
+#
+# Tuned for frictionless local development:
+#  - reads/installs require no auth
+#  - publishing is allowed anonymously (no `npm adduser` needed)
+#  - everything not hosted here is proxied + cached from the public npm registry
+
+storage: /verdaccio/storage/data
+plugins: /verdaccio/plugins
+
+web:
+  title: usecase dev registry
+  enable: true
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    # Allow `npm adduser` if a dev prefers a real account (optional).
+    max_users: 1000
+
+# Proxy + cache anything not published locally from npmjs.
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    maxage: 60m
+    cache: true
+
+packages:
+  "@*/*":
+    access: $all
+    publish: $all
+    unpublish: $all
+    proxy: npmjs
+  "**":
+    access: $all
+    publish: $all
+    unpublish: $all
+    proxy: npmjs
+
+# Allow reasonably large tarballs.
+max_body_size: 50mb
+
+# Listen on all interfaces inside the container so the port mapping works.
+listen:
+  - 0.0.0.0:4873
+
+log:
+  type: stdout
+  format: pretty
+  level: http
