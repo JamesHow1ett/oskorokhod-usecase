@@ -4,6 +4,10 @@ dist/
 .DS_Store
 *.tgz
 .verdaccio-storage/
+.npmrc
+
+# ENV vars
+.env
 
 # AI Tools
 .omc
