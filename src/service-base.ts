@@ -33,14 +33,27 @@ export interface RunContext<TValidParams = unknown> {
  *
  * @example
  * ```typescript
- * class UsersCreate extends ServiceBase<{ email: string }, { userId: string }> {
- *   static validation = { email: ['required', 'email'] };
+ * import { z } from "zod";
  *
- *   async checkPermissions(data) { return true; }
- *   async execute(data) { return { userId: '123' }; }
+ * // 1. Create one app-wide base class for cross-cutting concerns
+ * //    (aroundExecute, onError, a default checkPermissions policy, ...).
+ * abstract class AppService<TValidParams = unknown, TServiceResult = unknown>
+ *   extends ServiceBase<TValidParams, TServiceResult> {
+ *   protected async checkPermissions(): Promise<boolean> {
+ *     return true; // throw a ServiceError to deny
+ *   }
  * }
  *
- * const result = await new UsersCreate().run({ email: 'user@example.com' });
+ * // 2. Each service extends the base class and implements execute().
+ * class UsersCreate extends AppService<{ email: string }, { userId: string }> {
+ *   static validation = z.object({ email: z.email() });
+ *
+ *   protected async execute(data: { email: string }): Promise<{ userId: string }> {
+ *     return { userId: crypto.randomUUID() };
+ *   }
+ * }
+ *
+ * const result = await new UsersCreate().run({ email: "user@example.com" });
  * ```
  */
 export abstract class ServiceBase<TValidParams = unknown, TServiceResult = unknown> {
