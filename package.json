@@ -1,6 +1,6 @@
 {
-	"name": "clean-service-beta",
-	"version": "1.0.0-beta.1",
+	"name": "@oskorokhod/usecase",
+	"version": "1.0.0",
 	"description": "Reusable Zod-validated service-layer building blocks: ServiceBase pipeline, ServiceError, and Validator.",
 	"license": "ISC",
 	"author": "Oleksandr Skorokhod <mopis101@gmail.com>",
@@ -38,6 +38,11 @@
 		"test:watch": "vitest",
 		"check:exports": "attw --pack .",
 		"check:publish": "publint",
+		"check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build && npm run check:exports && npm run check:publish",
+		"registry:up": "docker compose up -d verdaccio",
+		"registry:down": "docker compose down",
+		"dev:publish": "npm run check && node scripts/dev-publish.mjs",
+		"release": "node --env-file-if-exists=.env scripts/release.mjs",
 		"prepack": "npm run build",
 		"prepare": "lefthook install"
 	},
@@ -49,6 +54,7 @@
 		"@eslint/js": "^10.0.1",
 		"eslint": "^10.4.1",
 		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.6.0",
 		"lefthook": "^2.1.9",
 		"prettier": "^3.8.3",
 		"publint": "^0.3.14",
@@ -59,7 +65,7 @@
 		"zod": "^4.3.6"
 	},
 	"publishConfig": {
-		"registry": "http://localhost:4873",
+		"access": "public",
 		"tag": "beta"
 	}
 }
