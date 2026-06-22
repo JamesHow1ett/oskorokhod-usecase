@@ -1,6 +1,6 @@
 {
 	"name": "@oskorokhod/usecase",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Reusable Zod-validated service-layer building blocks: ServiceBase pipeline, ServiceError, and Validator.",
 	"license": "ISC",
 	"author": "Oleksandr Skorokhod <mopis101@gmail.com>",
@@ -25,7 +25,7 @@
 	],
 	"sideEffects": false,
 	"engines": {
-		"node": ">=24"
+		"node": ">=18"
 	},
 	"scripts": {
 		"build": "tsup",
