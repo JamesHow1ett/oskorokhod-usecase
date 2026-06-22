@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added GitHub Actions workflow to publish on tag
+
+### Changed
+
+- Changed `publishConfig.tag` to `'latest'`
+
 ### Fixed
 
 - Downgrade the minimal NodeJS version to `18+`
