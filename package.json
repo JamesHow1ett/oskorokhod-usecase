@@ -4,6 +4,10 @@
 	"description": "Reusable Zod-validated service-layer building blocks: ServiceBase pipeline, ServiceError, and Validator.",
 	"license": "ISC",
 	"author": "Oleksandr Skorokhod <mopis101@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JamesHow1ett/oskorokhod-usecase.git"
+	},
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
